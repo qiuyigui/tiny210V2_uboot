@@ -449,6 +449,7 @@ static int dm9000_send(struct eth_device *netdev, void *packet, int length)
 */
 static void dm9000_halt(struct eth_device *netdev)
 {
+#ifndef CONFIG_DM9000_BUGGY_PHY
 	DM9000_DBG("%s\n", __func__);
 
 	/* RESET devie */
@@ -456,6 +457,7 @@ static void dm9000_halt(struct eth_device *netdev)
 	DM9000_iow(DM9000_GPR, 0x01);	/* Power-Down PHY */
 	DM9000_iow(DM9000_IMR, 0x80);	/* Disable all interrupt */
 	DM9000_iow(DM9000_RCR, 0x00);	/* Disable RX */
+#endif
 }
 
 /*
@@ -562,11 +564,11 @@ static void dm9000_get_enetaddr(struct eth_device *dev)
 	for (i = 0; i < 3; i++)
 		dm9000_read_srom_word(i, dev->enetaddr + (2 * i));
 #else
-	if (!eth_getenv_enetaddr("ethaddr",dev->enetaddr)) {
-	printf("Please set ethaddr!\n");
+	if (!eth_getenv_enetaddr("ethaddr", dev->enetaddr)) {
+	    printf("Please set ethaddr!\n");
 	}
-
 #endif
+
 }
 
 /*

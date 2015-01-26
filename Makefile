@@ -166,7 +166,7 @@ export	ARCH CPU BOARD VENDOR SOC
 ifeq ($(HOSTARCH),$(ARCH))
 CROSS_COMPILE ?=
 endif
-
+#CROSS_COMPILE ?=/opt/tiny210/toolschain/4.5.1/bin/arm-linux-
 # load other configuration
 include $(TOPDIR)/config.mk
 

@@ -32,25 +32,15 @@ DECLARE_GLOBAL_DATA_PTR;
 
 static void dm9000_pre_init(void)
 {
-	unsigned int SROM_BW_REG=(unsigned int *)(0xE8000000);
-	unsigned int SROM_BC1_REG=(unsigned int *)(0xE8000008);
-	unsigned int MP01CON_REG=(unsigned int *)(0xE02002E0);
-	unsigned int tmp;
-	#if defined(DM9000_16BIT_DATA)
-	//SROM_BW_REG &= ~(0xf << 20);
-	//SROM_BW_REG |= (0<<23) | (0<<22) | (0<<21) | (1<<20);
-	SROM_BW_REG &= ~(0xf << 4);
-	SROM_BW_REG |= (0x1 << 4);
+	 unsigned int *SROM_BW_REG=(unsigned int *)(0xE8000000);
+	 unsigned int *SROM_BC1_REG=(unsigned int *)(0xE8000008);
+	 unsigned int *MP01CON_REG=(unsigned int *)(0xE02002E0);
 
-	#else
-	SROM_BW_REG &= ~(0xf << 20);
-	SROM_BW_REG |= (0<<19) | (0<<18) | (0<<16);
-	#endif
-	SROM_BC1_REG = ((0<<28)|(0<<24)|(5<<16)|(0<<12)|(0<<8)|(0<<4)|(0<<0));
-	tmp = MP01CON_REG;
-	tmp &=~(0xf<<4);
-	tmp |=(2<<4);
-	MP01CON_REG = tmp;
+
+	(*MP01CON_REG ) |=(2<<4);
+	(*SROM_BW_REG ) |= (0xF << 4);
+
+
 }
 /*
  * Miscellaneous platform dependent initialisations

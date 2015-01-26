@@ -27,8 +27,9 @@
 
 #ifndef __CONFIG_H
 #define __CONFIG_H
-#define DEBUG
-/* SPL add by qiuyigui 2014-04-23*/  
+/*#define DEBUG*/
+/* SPL add by qiuyigui 2014-04-23*/
+
 #define CONFIG_SPL  
 #define CONFIG_SPL_FRAMEWORK
 /*#define CONFIG_SYS_ICACHE_OFF*/
@@ -38,6 +39,7 @@
 #define CONFIG_NAND_S5PV210
 
 #define CONFIG_AUTO_COMPLETE /*开启命令自动补全函数的编译*/
+#define CONFIG_ARP_TIMEOUT  50000UL
 /*
  * High Level Configuration Options
  * (easy to change)
@@ -55,8 +57,8 @@
 #define CONFIG_DISPLAY_BOARDINFO
 
 /* input clock of PLL: SMDKC100 has 12MHz input clock */
-#define CONFIG_SYS_CLK_FREQ		12000000
-
+/*#define CONFIG_SYS_CLK_FREQ		12000000*/
+#define CONFIG_SYS_CLK_FREQ		24000000
 /* DRAM Base */
 #define CONFIG_SYS_SDRAM_BASE		0x20000000 /*0x30000000*/
 
@@ -245,7 +247,8 @@
 #define CONFIG_DRIVER_DM9000       1
 #define CONFIG_NET_MULTI               1
 #define CONFIG_NET_RETRY_COUNT 1
-#define CONFIG_DM9000_NO_SROM 1
+#define CONFIG_DM9000_NO_SROM          1
+#define CONFIG_DM9000_BUGGY_PHY 1
 #ifdef  CONFIG_DRIVER_DM9000  
 #define CONFIG_DM9000_BASE              (0x88001000)
 #define DM9000_IO                       (CONFIG_DM9000_BASE)
